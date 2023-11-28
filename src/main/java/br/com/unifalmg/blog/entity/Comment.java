@@ -12,23 +12,20 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "db2022108012", name = "user")
-public class User implements Serializable {
-
+@Table(schema = "db2022108012", name = "comment")
+public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
-    private String username;
-
-    private String phone;
-
     private String email;
 
-    private String website;
+    private String body;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> post;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
 }
