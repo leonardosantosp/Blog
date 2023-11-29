@@ -37,7 +37,7 @@ public class UserService {
     public User add(User user){
         if (Objects.isNull(user)
         || Objects.isNull(user.getName()) || Objects.isNull(user.getUsername())
-            || Objects.isNull(user.getEmail())){
+            || Objects.isNull(user.getEmail()) || user.getUsername().isEmpty() || user.getEmail().isEmpty() || user.getName().isEmpty()){
             throw new InvalidUserException();
         }
         return repository.save(user);

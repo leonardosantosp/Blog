@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -43,7 +44,16 @@ public class BlogController {
         //service.add || service.save
         log.info("Entrou no cadastro de usuário");
         service.add(user);
-        return "newUser";
+        User addedUser = service.add(user);
+        return "redirect:user/" + addedUser.getId();
+    }
+
+    @GetMapping("/user/{id}")
+    public String showUser(@PathVariable("id") Integer id,
+                           Model model){
+        User user = service.findById(id);
+        model.addAttribute("user", user);
+        return "showuser";
     }
 
 }
