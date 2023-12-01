@@ -15,8 +15,11 @@ import java.util.List;
 @Table(schema = "db2022108012", name = "post")
 public class Post implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String title;
+
     private String body;
 
     @ManyToOne

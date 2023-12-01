@@ -1,11 +1,13 @@
 package br.com.unifalmg.blog.service;
 
+import br.com.unifalmg.blog.controller.request.UserRequest;
 import br.com.unifalmg.blog.entity.User;
 import br.com.unifalmg.blog.exception.InvalidUserException;
 import br.com.unifalmg.blog.exception.UserNotFoundException;
 import br.com.unifalmg.blog.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +43,21 @@ public class UserService {
             throw new InvalidUserException();
         }
         return repository.save(user);
+    }
+
+    public void deleteById(Integer id){
+        repository.deleteById(id);
+    }
+
+    public User add(UserRequest request) {
+        User user = User.builder()
+                .name(request.getName())
+                .username(request.getUsername())
+                .email(request.getEmail())
+                .phone(request.getPhone())
+                .website(request.getWebsite())
+                .build();
+        return add(user);
     }
 
 }
